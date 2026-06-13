@@ -187,7 +187,7 @@ checkoutBtn.addEventListener("click", function(){
 function checkRestaurantOpen(){
     const data = new Date();
     const hora = data.getHours();
-    return hora >= 16 && hora < 22;
+    return hora >= 13 && hora < 22;
     //true = restaurante aberto
 }
 
@@ -201,3 +201,57 @@ if(isOpen){
     spanItem.classList.remove("bg-green-600")
     spanItem.classList.add("bg-red-500")
 }
+
+
+const paymentSelect = document.getElementById("payment");
+const trocoInput = document.getElementById("troco");
+
+const savedCart = localStorage.getItem("cart");
+if(savedCart){
+    cart = JSON.parse(savedCart);
+    updateCartModel();
+}
+
+const oldUpdate = updateCartModel;
+updateCartModel = function(){
+    oldUpdate();
+    localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+checkoutBtn.addEventListener("click", function(){
+
+    if(cart.length === 0) return;
+
+    const payment = paymentSelect ? paymentSelect.value : "";
+
+    if(addressInput.value === "" || payment === ""){
+        return;
+    }
+
+    const total = cart.reduce((acc,item)=>acc + item.price * item.quantity,0);
+
+    const itens = cart.map(item =>
+`🍔 ${item.name}
+Qtd: ${item.quantity}
+Valor: R$ ${item.price.toFixed(2)}`
+    ).join("\n\n");
+
+    let mensagem = `📋 NOVO PEDIDO
+
+${itens}
+
+💰 Total: R$ ${total.toFixed(2)}
+
+💳 Pagamento: ${payment}
+
+📍 Endereço:
+${addressInput.value}`;
+
+    if(payment === "Dinheiro" && trocoInput.value.trim() !== ""){
+        mensagem += `
+
+🪙 Troco para: R$ ${trocoInput.value}`;
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+});
