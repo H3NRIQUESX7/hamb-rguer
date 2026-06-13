@@ -25,7 +25,7 @@
             <span class="text-white font-medium">Brasília, Gama - DF</span>
 
             <div class="bg-green-600 px-4 py-1 rounded-lg mt-5" id="date-span">
-                <span class="text-white font-medium">Seg á Dom - 18:00 as 22:00</span>
+                <span class="text-white font-medium">Seg á Dom - 13:00 as 22:00</span>
             </div>
         </div>
     </header>
@@ -75,7 +75,7 @@
                         <p class="font-bold text-lg">R$32.90</p>
                         <button class="bg-gray-900 px-5 rounded add-to-cart-btn"
                         data-name="Hamburguer Duplo"
-                        data-price="32.90s"
+                        data-price="32.90"
                         >
                             <i class="fa fa-cart-plus text-lg text-white"></i>
                         </button>
@@ -209,6 +209,20 @@
             class="w-full border-2 p-1 rounded my-1"
             >
             <p class="text-red-500 hidden" id="address-warn">Digite seu endereço completo</p>
+
+            <p class="font-bold mt-4">Forma de pagamento</p>
+            <select id="payment" class="w-full border-2 p-2 rounded my-1">
+                <option value="">Selecione</option>
+                <option value="Pix">Pix</option>
+                <option value="Dinheiro">Dinheiro</option>
+                <option value="Cartão de Débito">Cartão de Débito</option>
+                <option value="Cartão de Crédito">Cartão de Crédito</option>
+            </select>
+
+            <input type="text"
+            id="troco"
+            placeholder="Troco para quanto? (somente dinheiro)"
+            class="w-full border-2 p-1 rounded my-1">
 
             <div class="flex items-center justify-between mt-5 w-full">
                 <button id="close-modal-btn">Fechar</button>
